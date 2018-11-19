@@ -18,7 +18,7 @@ func SetupStore() {
 		crt := os.Getenv("RAVEN_CERT")
 		key := os.Getenv("RAVEN_KEY")
 
-		cert, err := tls.LoadX509KeyPair(crt, key)
+		cert, err := tls.X509KeyPair([]byte(crt), []byte(key))
 		if err != nil {
 			log.Println(err)
 		}

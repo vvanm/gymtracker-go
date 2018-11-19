@@ -83,8 +83,14 @@ func SignIn(c *gin.Context) {
 		`,
 	)
 
+	if u == nil {
+		c.JSON(400, gin.H{"errorMsg": "no user found"})
+		return
+	}
+
 	if err != nil {
 		c.JSON(400, gin.H{"errorMsg": err.Error()})
+		return
 	}
 
 	//Check password match

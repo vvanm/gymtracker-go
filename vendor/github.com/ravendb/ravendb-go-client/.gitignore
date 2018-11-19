@@ -1,0 +1,31 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
+.glide/
+/.idea
+
+responses.log
+.vscode/
+main
+cmd/test/debug
+cmd/loggingproxy/db
+logs/
+RavenDB/
+coverage.txt
+RavenDB.tar.bz2
+capturer
+foo.pcap
+pcap_convert
+netgraph
+*.zip
+.DS_Store

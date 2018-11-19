@@ -1,0 +1,33 @@
+# based on https://github.com/ravendb/ravendb-ruby-client/blob/v4.0/.travis.yml
+sudo: required
+dist: trusty
+language: go
+
+notifications:
+  email:
+    - kkowalczyk@gmail.com
+
+go:
+  - 1.11
+
+# TODO: maybe use latest build instead of latest stable
+# - wget -O RavenDB.tar.bz2 https://hibernatingrhinos.com/downloads/RavenDB%20for%20Linux%20x64/latest?buildType=nightly
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libunwind8 wget libicu52 libssl-dev curl unzip gettext libcurl4-openssl-dev zlib1g uuid-dev bzip2 openssl sed libpcap-dev
+  - mkdir ./certs; cd ./certs
+  - sudo cp ca.crt /usr/local/share/ca-certificates/ca.crt
+  - sudo update-ca-certificates
+  - cd ..
+  - wget -O RavenDB.tar.bz2 https://daily-builds.s3.amazonaws.com/RavenDB-4.0.6-linux-x64.tar.bz2
+  - tar xvjf RavenDB.tar.bz2
+  - rm RavenDB.tar.bz2
+  - ls -lah RavenDB
+  - go get -d -t -v ./...
+
+script:
+  - ./scripts/travis_run_tests.sh
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
